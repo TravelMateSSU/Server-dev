@@ -1,2 +1,8 @@
 # virtualenv
 venvTravelMate/
+
+# pycharm
+.idea/
+
+# python cache
+*.pyc
