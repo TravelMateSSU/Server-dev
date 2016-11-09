@@ -13,14 +13,22 @@ class TravelEvent(db.Model):
     current_tourist = db.Column(db.Integer)     # 현재 모집자 수
     travel_start_time = db.Column(db.DateTime)  # 여행 시작 날짜와 시간
     travel_end_time = db.Column(db.DateTime)    # 여행 끝 날짜와 시간
-    event_end_time = db.Column(db.DateTime)     # 모집이 끝나는 시간, 모집글이 등록되는 순간부터 모집 시작
+    event_end_time = db.Column(db.DateTime)     # 모집이 끝나는 시간, 모집글이 등록되는 순간부터 모집 시
     status = db.Column(db.Integer)              # 모집여부, 0: 모집 끝, 1:모집 진행중
     hash_tag = db.Column(db.String(200))        # 검색을 위해서 이벤트가 지나가는 경로에 대한 해시태그
     created = db.Column(db.DateTime)
 
-    def __init__(self, user_id, course_id, description, hash_tag):
+    def __init__(self, user_id, course_id, title, description, max_tourist, start_time, end_time, event_end_time, hash_tag):
         self.user_id = user_id
         self.course_id = course_id
+        self.title = title
         self.description = description
+        self.max_tourist = max_tourist
+        self.current_tourist = 1            # 처음에는 무조건 본인 한명
+        self.travel_start_time = start_time
+        self.travel_end_time = end_time
+        self.event_end_time = event_end_time
+        self.status = 1                     # 처음에 등록하면 무조건 모집 중 상태
         self.hash_tag = hash_tag
+        self.created = datetime.now()       # 만들면 현재 날짜를 등록
 
