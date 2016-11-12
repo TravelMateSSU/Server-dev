@@ -14,5 +14,5 @@ db = SQLAlchemy(app)
 from app.models import *
 from app.routes import *
 
-db.create_all()
+# db.create_all()
 

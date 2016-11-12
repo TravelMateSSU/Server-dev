@@ -1,14 +1,12 @@
 from app import app
-from flask import jsonify
+from flask import jsonify, request
 
 @app.route('/', methods=['GET', 'POST'])
 def index_page():
 
     return "inde page"
 
-@app.route('/echo')
+@app.route('/echo', methods=['GET', 'POST'])
 def echo():
-    ex_dict = {}
-    ex_dict['pang'] = 'aldf'
-    ex_dict['elh'] = 'dfadf'
-    return jsonify(ex_dict)
+    print("echo", request.json)
+    return jsonify(request.json)
