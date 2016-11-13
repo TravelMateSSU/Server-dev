@@ -22,13 +22,9 @@ class CourseDetail(db.Model):
     content_id = db.Column(db.String(50), nullable=False)   # API 의 content_id 를 담아둘 칼럼, NOT NULL
     content_type = db.Column(db.String(20), nullable=False) # API 의 content_type 을 담아둘 칼럼, NOT NULL
     image_url = db.Column(db.String(200))                   # API 의 image url 정보를 담아둘 칼럼
-    description = db.Column(db.String(1000))                 # API 의 description 을 담아둘 칼럼, NULL
 
-    def __init__(self, course_id, sequence_id, content_id, content_type, description=None):
+    def __init__(self, course_id, sequence_id, content_id, content_type):
         self.course_id = course_id
         self.sequence_id = sequence_id
         self.content_id = content_id
         self.content_type = content_type
-        self.description = description
-
-    pass

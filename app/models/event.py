@@ -32,3 +32,6 @@ class TravelEvent(db.Model):
         self.hash_tag = hash_tag
         self.created = datetime.now()       # 만들면 현재 날짜를 등록
 
+    def as_dict(self):
+        return {x.name: getattr(self, x.name) for x in self.__table__.columns}
+
