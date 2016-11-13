@@ -10,7 +10,7 @@ class CourseMeta(db.Model):
 
     def __init__(self, selected_num):
         self.selected_num = selected_num
-
+        self.created = datetime.now()
 
 
 class CourseDetail(db.Model):

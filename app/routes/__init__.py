@@ -1,2 +1,3 @@
 __all__ = ['index',
-           'user']
+           'user',
+           'event']
