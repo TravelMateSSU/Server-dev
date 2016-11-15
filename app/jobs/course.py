@@ -57,7 +57,7 @@ def add_course(course_list):
 
     new_course_id = CourseMeta.query.order_by(CourseMeta.created.desc()).first().course_id
     for detail_item in course_list:
-        new_course_detail = CourseDetail(new_course_id, detail_item['sequence_id'], detail_item['content_id'], detail_item['content_type'])
+        new_course_detail = CourseDetail(new_course_id, detail_item['sequence_id'], detail_item['content_id'], detail_item['content_type'], detail_item['image_url'])
         db.session.add(new_course_detail)
         db.session.commit()
 

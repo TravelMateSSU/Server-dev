@@ -3,7 +3,8 @@ from datetime import datetime
 
 class User(db.Model):
     __tablename__ = 'travel_user'
-
+    __table_args__ = {'mysql_collate': 'utf8_general_ci'}
+    
     user_id = db.Column(db.String(30), primary_key=True, unique=True)
     user_name = db.Column(db.String(30))
     profile_url = db.Column(db.String(100))
