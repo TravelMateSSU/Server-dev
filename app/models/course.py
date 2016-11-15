@@ -12,6 +12,9 @@ class CourseMeta(db.Model):
         self.selected_num = selected_num
         self.created = datetime.now()
 
+    def as_dict(self):
+        return {x.name: getattr(self, x.name) for x in self.__table__.columns}
+
 
 class CourseDetail(db.Model):
     __tablename__ = 'course_detail'
@@ -28,3 +31,6 @@ class CourseDetail(db.Model):
         self.sequence_id = sequence_id
         self.content_id = content_id
         self.content_type = content_type
+
+    def as_dict(self):
+        return {x.name: getattr(self, x.name) for x in self.__table__.columns}

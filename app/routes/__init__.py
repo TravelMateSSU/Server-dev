@@ -1,3 +1,4 @@
 __all__ = ['index',
            'user',
-           'event']
+           'event',
+           'database']

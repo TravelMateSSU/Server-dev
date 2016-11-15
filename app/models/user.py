@@ -18,3 +18,6 @@ class User(db.Model):
 
     def __repr__(self):
         return 'user_id : %s, user_name : %s, profile_url : %s' % (self.user_id, self.user_name, self.profile_url)
+
+    def as_dict(self):
+        return {x.name: getattr(self, x.name) for x in self.__table__.columns}
