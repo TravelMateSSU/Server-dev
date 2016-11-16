@@ -26,13 +26,13 @@ def search_event_by_eventid(event_id):
     """
     return TravelEvent.query.filter_by(event_id=event_id).first()
 
-def search_events(status=1):
+def search_events(status=1, off_set=0, limit_num=20):
     """
     status = 1 : 현재 모집중인 event 만 보기
     status = 0 : 모집 종료된 event 만 보기
     status = -1 : 모든 event 보기
     """
     if status == -1:
-        return TravelEvent.query.all()
+        return TravelEvent.query.order_by(TravelEvent.created.desc()).offset(off_set).limit(limit_num)
     else:
-        return TravelEvent.query.filter_by(status=status).all()
+        return TravelEvent.query.filter_by(status=status).order_by(TravelEvent.created.desc()).offset(off_set).limit(limit_num)

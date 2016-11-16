@@ -47,7 +47,7 @@ def events_list():
     else:
         # status 에 따라서 찾아갈 때
         # 1 : 모집중, 0 : 모집종료, -1: 모든 경우
-        queries = search_events(from_client['status'])
+        queries = search_events(from_client['status'], from_client['offset'], from_client['limit'])
         to_client['debug'] = "모집 상태에 따라서 모집글을 찾습니다"
         for open_events in queries:
             to_client['events_list'].append(open_events.as_dict())
