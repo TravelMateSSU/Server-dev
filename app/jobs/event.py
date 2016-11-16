@@ -20,6 +20,12 @@ def search_events_by_userid(user_id):
     """
     return TravelEvent.query.filter_by(user_id=user_id).all()
 
+def search_event_by_eventid(event_id):
+    """
+    event_id 를 기준으로 event 를 찾기. 한개만 리턴
+    """
+    return TravelEvent.query.filter_by(event_id=event_id).first()
+
 def search_events(status=1):
     """
     status = 1 : 현재 모집중인 event 만 보기

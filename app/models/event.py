@@ -36,3 +36,4 @@ class TravelEvent(db.Model):
     def as_dict(self):
         return {x.name: getattr(self, x.name) for x in self.__table__.columns}
 
+

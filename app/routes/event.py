@@ -1,8 +1,8 @@
 from app import app
-from app import db
 from flask import request, jsonify
 from app.jobs.course import check_course_id, add_course
 from app.jobs.event import add_new_event, search_events_by_userid, search_events
+from app.jobs.user import user_join_event
 
 @app.route('/event/enroll', methods=['POST'])
 def enroll_event():
@@ -51,5 +51,21 @@ def events_list():
         to_client['debug'] = "모집 상태에 따라서 모집글을 찾습니다"
         for open_events in queries:
             to_client['events_list'].append(open_events.as_dict())
+
+    return jsonify(to_client)
+
+@app.route('/event/join', methods=['POST'])
+def join_event():
+    to_client = dict()
+    from_client = request.json
+
+    if user_join_event(from_client['user_id'], from_client['event_id']):
+        # join 에 성공하였다는 뜻
+        to_client['debug'] = "해당 이벤트에 참여가 성공하였습니다 current_tourist 의 수가 업데이트 되었는지 확인해주세요"
+        to_client['join_event'] = True
+    else:
+        # join 에 실패하였다는 뜻
+        to_client['debug'] = "이벤트 참여에 실패하였습니다 모집인원이 꽉찼거나 알 수 없는 이유에 의해서 실패하였습니다"
+        to_client['join_event'] = False
 
     return jsonify(to_client)
