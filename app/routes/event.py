@@ -1,7 +1,7 @@
 from app import app
 from flask import request, jsonify
 from app.jobs.course import check_course_id, add_course
-from app.jobs.event import add_new_event, search_events_by_userid, search_events
+from app.jobs.event import add_new_event, search_events_by_userid, search_events, search_events_by_hashtag
 from app.jobs.user import user_join_event
 
 @app.route('/event/enroll', methods=['POST'])
@@ -43,7 +43,10 @@ def events_list():
             to_client['events_list'].append(open_events.as_dict())
     elif from_client['status'] == 3:
         # hash_tag 로 검색하는 경우가 들어올 것이다
-        pass
+        queries = search_events_by_hashtag(from_client['hash_tag'], from_client['offset'], from_client['limit'])
+        to_client['debug'] = from_client['hash_tag']+" 의 키워드를 갖는 내용으로 이벤트 리스트를 찾은 결과입니다"
+        for open_events in queries:
+            to_client['events_list'].append(open_events.as_dict())
     else:
         # status 에 따라서 찾아갈 때
         # 1 : 모집중, 0 : 모집종료, -1: 모든 경우

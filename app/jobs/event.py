@@ -36,3 +36,6 @@ def search_events(status=1, off_set=0, limit_num=20):
         return TravelEvent.query.order_by(TravelEvent.created.desc()).offset(off_set).limit(limit_num)
     else:
         return TravelEvent.query.filter_by(status=status).order_by(TravelEvent.created.desc()).offset(off_set).limit(limit_num)
+
+def search_events_by_hashtag(hash_tag, off_set=0, limit_num=20):
+    return TravelEvent.query.filter(TravelEvent.hash_tag.like("%"+hash_tag+"%")).order_by(TravelEvent.created.desc()).offset(off_set).limit(limit_num)
