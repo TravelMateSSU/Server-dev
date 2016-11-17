@@ -1,5 +1,5 @@
 from app import db
-from app.models.course import CourseDetail, CourseMeta
+from app.models.course import CourseDetail, CourseMeta, CourseReview
 from sqlalchemy import and_
 
 def check_course_id(course_list):
@@ -62,3 +62,14 @@ def add_course(course_list):
         db.session.commit()
 
     return new_course_id
+
+def add_course_review(course_id, user_id, review):
+    new_course_review = CourseReview(course_id, user_id, review)
+    db.session.add(new_course_review)
+    db.session.commit()   # 새로운 CourseReview row 추가 완료
+    return None
+
+def search_course_reviews(course_id, off_set=0, limit_num=20):
+    if limit_num is None:
+        limit_num = 20
+    return CourseReview.query.filter_by(course_id=course_id).order_by(CourseReview.created.desc()).offset(off_set).limit(limit_num)

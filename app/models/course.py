@@ -37,3 +37,23 @@ class CourseDetail(db.Model):
 
     def as_dict(self):
         return {x.name: getattr(self, x.name) for x in self.__table__.columns}
+
+
+class CourseReview(db.Model):
+    __tablename__ = 'course_review'
+    __table_args__ = {'mysql_collate': 'utf8_general_ci'}
+
+    pid = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)  # primary key
+    course_id = db.Column(db.Integer)                       # 어느 코스에 해당하는 내용물인지
+    user_id = db.Column(db.String(30))
+    review = db.Column(db.String(1000))
+    created = db.Column(db.DateTime)
+
+    def __init__(self, course_id, user_id, review):
+        self.course_id = course_id
+        self.user_id = user_id
+        self.review = review
+        self.created = datetime.now()
+
+    def as_dict(self):
+        return {x.name: getattr(self, x.name) for x in self.__table__.columns}
